@@ -47,10 +47,10 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: |
-        export TF_VAR_project_id:$TF_VAR_project_id
-        export TF_VAR_vpc_name:$TF_VAR_vpc_name
-        export TF_VAR_subnet_name:$TF_VAR_subnet_name
-        export TF_VAR_region:$TF_VAR_region
+        export TF_VAR_project_id=$TF_VAR_project_id
+        export TF_VAR_vpc_name=$TF_VAR_vpc_name
+        export TF_VAR_subnet_name=$TF_VAR_subnet_name
+        export TF_VAR_region=$TF_VAR_region
         terraform plan -input=false
     
       # On push to "main", build or change infrastructure according to Terraform configuration files
@@ -58,8 +58,8 @@ jobs:
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/"main"' && github.event_name == 'push'
       run: |
-        export TF_VAR_project_id:$TF_VAR_project_id
-        export TF_VAR_vpc_name:$TF_VAR_vpc_name
-        export TF_VAR_subnet_name:$TF_VAR_subnet_name
-        export TF_VAR_region:$TF_VAR_region
+        export TF_VAR_project_id=$TF_VAR_project_id
+        export TF_VAR_vpc_name=$TF_VAR_vpc_name
+        export TF_VAR_subnet_name=$TF_VAR_subnet_name
+        export TF_VAR_region=$TF_VAR_region
         terraform apply -auto-approve -input=false
